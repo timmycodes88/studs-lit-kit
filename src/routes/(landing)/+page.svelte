@@ -6,7 +6,7 @@
   import Glow from './Glow.svelte'
   import Card from '$lib/components/ui/card.svelte'
 
-  let hasEntered = true
+  let hasEntered = false
   let audio: HTMLAudioElement
 
   const play = () => {
