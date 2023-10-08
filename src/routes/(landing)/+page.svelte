@@ -5,6 +5,7 @@
   import TypeWrite from './type-write.svelte'
   import Glow from './Glow.svelte'
   import Card from '$lib/components/ui/card.svelte'
+  import LoadPageParticals from './load-page-particals.svelte'
 
   let hasEntered = false
   let audio: HTMLAudioElement
@@ -25,11 +26,12 @@
     class="absolute inset-0 flex items-center justify-center bg-black z-10"
     out:fade={{ duration: 888 }}
   >
+    <LoadPageParticals />
     <div
       role="group"
       on:mouseenter={() => (showGlow = true)}
       on:mouseleave={() => (showGlow = false)}
-      class="flex items-center justify-center p-32"
+      class="flex items-center justify-center p-[12rem]"
     >
       <button
         on:click={play}
@@ -42,6 +44,7 @@
   </div>
 {:else}
   <img src="/assets/metame.png" alt="Meta Me" />
+
   <Glow />
   <div class="wrapper">
     <div class="leftCol">
