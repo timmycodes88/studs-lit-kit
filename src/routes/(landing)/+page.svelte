@@ -6,11 +6,18 @@
   import Glow from './Glow.svelte'
   import Card from '$lib/components/ui/card.svelte'
   import LoadPageParticals from './load-page-particals.svelte'
+  import { audioStore } from '$lib/stores/landing/audioStore'
 
   let hasEntered = false
   let audio: HTMLAudioElement
 
-  const play = () => {
+  $: if ($audioStore) {
+    audio?.play()
+  } else {
+    audio?.pause()
+  }
+
+  const start = () => {
     audio = new Audio('/assets/her.mp3')
     audio.loop = true
     audio.play()
@@ -34,7 +41,7 @@
       class="flex items-center justify-center p-[24rem]"
     >
       <button
-        on:click={play}
+        on:click={start}
         class="text-white text-lg font-bold hover:scale-105 transition-transform"
       >
         Enter the Portal

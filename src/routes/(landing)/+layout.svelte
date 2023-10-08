@@ -1,11 +1,21 @@
 <script lang="ts">
   import ThemeToggle from '$lib/components/shared/theme-toggle.svelte'
+  import { audioStore } from '$lib/stores/landing/audioStore'
+  import { Volume2, VolumeX } from 'lucide-svelte'
 </script>
 
 <header>
   <h1>Stud's Lit Kit</h1>
 
   <div class="trail">
+    <label class="swap">
+      <!-- this hidden checkbox controls the state -->
+      <input type="checkbox" bind:checked={$audioStore} />
+
+      <!-- volume on icon -->
+      <Volume2 on:click={() => audioStore.set(true)} class="swap-on" />
+      <VolumeX on:click={() => audioStore.set(false)} class="swap-off" />
+    </label>
     <ThemeToggle />
     <button>
       <span class="md:hidden">Join</span>
