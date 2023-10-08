@@ -17,12 +17,15 @@
   } else {
     audio?.pause()
   }
-
+  let landingParticlesReady = false
   const start = () => {
     audio = new Audio('/assets/her.mp3')
     audio.loop = true
     audio.play()
     hasEntered = true
+    setTimeout(() => {
+      landingParticlesReady = true
+    }, 1300)
   }
   onMount(() => () => audio.pause())
 
@@ -48,7 +51,7 @@
         Enter the Portal
       </button>
     </div>
-    <Glow {showGlow} />
+    <Glow enter {showGlow} />
   </div>
 {:else}
   <img src="/assets/metame.png" alt="Meta Me" />
@@ -75,14 +78,18 @@
       <a
         href="https://github.com/timmycodes88/studs-lit-kit"
         target="_blank"
-        class="btn btn-link"
+        class="hidden btn btn-link lg:inline-flex"
       >
         Check out the Source Code
       </a>
     </div>
-    <LandingPageParticals />
     <Feature mobile />
   </div>
+  {#if landingParticlesReady}
+    <div in:fade={{ duration: 1250 }}>
+      <LandingPageParticals />
+    </div>
+  {/if}
 {/if}
 
 <style lang="postcss">
