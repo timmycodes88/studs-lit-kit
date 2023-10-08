@@ -68,7 +68,7 @@
 <slot />
 <div
   class={cn(
-    "fixed inset-0 z-[-2] opacity-0 transition-opacity duration-700",
+    "fixed inset-0 z-[-2] opacity-0 transition-opacity duration-1000",
     landingParticlesReady && "opacity-100"
   )}
 >
