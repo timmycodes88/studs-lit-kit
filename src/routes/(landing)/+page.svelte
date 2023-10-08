@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { fade } from 'svelte/transition'
+  import { fade, scale } from 'svelte/transition'
   import Feature from './features-list.svelte'
   import TypeWrite from './type-write.svelte'
   import Glow from './Glow.svelte'
@@ -8,6 +8,8 @@
   import LoadPageParticals from './load-page-particals.svelte'
   import { audioStore } from '$lib/stores/landing/audioStore'
   import LandingPageParticals from './landing-page-particals.svelte'
+  import { quintInOut } from 'svelte/easing'
+  import { cn } from '$lib/utils'
 
   let hasEntered = false
   let audio: HTMLAudioElement
@@ -35,7 +37,7 @@
 {#if !hasEntered}
   <div
     class="absolute inset-0 flex items-center justify-center bg-black z-10"
-    out:fade={{ duration: 1250 }}
+    out:fade={{ duration: 1250, easing: quintInOut }}
   >
     <LoadPageParticals />
     <div
@@ -54,10 +56,9 @@
     <Glow enter {showGlow} />
   </div>
 {:else}
-  <img src="/assets/metame.png" alt="Meta Me" />
-
-  <Glow />
-  <div class="wrapper">
+  <div in:fade={{ duration: 4000, easing: quintInOut }} class="wrapper">
+    <img src="/assets/metame.png" alt="Meta Me" />
+    <Glow />
     <div class="col">
       <TypeWrite />
       <Feature />
@@ -85,11 +86,16 @@
     </div>
     <Feature mobile />
   </div>
-  {#if landingParticlesReady}
-    <div in:fade={{ duration: 1250 }}>
+  <div
+    class={cn(
+      'fixed inset-0 z-[-2] opacity-0 transition-opacity duration-700',
+      landingParticlesReady && 'opacity-100'
+    )}
+  >
+    {#if landingParticlesReady}
       <LandingPageParticals />
-    </div>
-  {/if}
+    {/if}
+  </div>
 {/if}
 
 <style lang="postcss">

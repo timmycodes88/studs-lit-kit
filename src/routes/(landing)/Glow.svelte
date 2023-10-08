@@ -22,40 +22,32 @@
   }
   .glowSmall {
     @apply w-64 h-64 md:w-72 md:h-72;
-    animation: pulse 5s cubic-bezier(0, 0, 0, 0.5) infinite,
-      glow2 8s linear infinite;
+    animation: pulse2 5s cubic-bezier(0, 0, 0, 0.5) infinite,
+      glow 3s linear infinite;
   }
   @keyframes glow {
     0% {
-      @apply bg-[#d41876]/50;
+      @apply bg-red-600/70;
     }
     33% {
-      @apply bg-[#ebb305]/50;
+      @apply bg-yellow-400/70;
     }
     66% {
-      @apply bg-[#383efe]/50;
+      @apply bg-blue-500/70;
     }
     100% {
-      @apply bg-[#d41876]/50;
+      @apply bg-red-600/70;
     }
   }
-  @keyframes glow2 {
-    0% {
-      @apply bg-[#fff]/50;
-    }
-    33% {
-      @apply bg-[#fff]/50;
-    }
-    66% {
-      @apply bg-[#fff]/50;
-    }
-    100% {
-      @apply bg-[#fff]/50;
-    }
-  }
+
   @keyframes pulse {
     50% {
       transform: scale(1.1);
+    }
+  }
+  @keyframes pulse2 {
+    50% {
+      transform: scale(1.5);
     }
   }
 </style>
