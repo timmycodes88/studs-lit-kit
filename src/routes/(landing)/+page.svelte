@@ -7,6 +7,7 @@
   import Card from '$lib/components/ui/card.svelte'
   import LoadPageParticals from './load-page-particals.svelte'
   import { audioStore } from '$lib/stores/landing/audioStore'
+  import LandingPageParticals from './landing-page-particals.svelte'
 
   let hasEntered = false
   let audio: HTMLAudioElement
@@ -54,22 +55,32 @@
 
   <Glow />
   <div class="wrapper">
-    <div class="leftCol">
+    <div class="col">
       <TypeWrite />
       <Feature />
     </div>
 
-    <Card let:C>
-      <C.Title>BrightSide Developer's Latest Creation!</C.Title>
-      <C.Text>
-        Stud's Lit Kit is the Ultimate Tech Stack to Develop High Quality Social
-        Applications at Rapid Speeds.
-      </C.Text>
-      <C.Actions>
-        <button class="btn btn-primary"> Join Now! </button>
-      </C.Actions>
-    </Card>
+    <div class="col">
+      <Card let:C bg="bg-base-200/50">
+        <C.Title>BrightSide Developer's Latest Creation!</C.Title>
+        <C.Text>
+          Stud's Lit Kit is the Ultimate Tech Stack to Develop High Quality
+          Social Applications at Rapid Speeds.
+        </C.Text>
+        <C.Actions>
+          <button class="btn btn-primary"> Join Now! </button>
+        </C.Actions>
+      </Card>
 
+      <a
+        href="https://github.com/timmycodes88/studs-lit-kit"
+        target="_blank"
+        class="btn btn-link"
+      >
+        Check out the Source Code
+      </a>
+    </div>
+    <LandingPageParticals />
     <Feature mobile />
   </div>
 {/if}
@@ -79,7 +90,7 @@
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1];
   }
 
-  .leftCol {
+  .col {
     @apply mx-auto flex flex-col gap-10 lg:w-[32rem] lg:m-0;
   }
   .wrapper {
