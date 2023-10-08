@@ -98,8 +98,8 @@
       emitters: {
         direction: 'none',
         rate: {
-          quantity: 5,
-          delay: 0.3,
+          quantity: 10,
+          delay: 0.25,
         },
         size: {
           width: 0,

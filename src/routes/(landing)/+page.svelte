@@ -24,18 +24,18 @@
 {#if !hasEntered}
   <div
     class="absolute inset-0 flex items-center justify-center bg-black z-10"
-    out:fade={{ duration: 888 }}
+    out:fade={{ duration: 1250 }}
   >
     <LoadPageParticals />
     <div
       role="group"
       on:mouseenter={() => (showGlow = true)}
       on:mouseleave={() => (showGlow = false)}
-      class="flex items-center justify-center p-[12rem]"
+      class="flex items-center justify-center p-[24rem]"
     >
       <button
         on:click={play}
-        class="text-white hover:scale-105 transition-transform"
+        class="text-white text-lg font-bold hover:scale-105 transition-transform"
       >
         Enter the Portal
       </button>
