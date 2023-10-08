@@ -20,7 +20,7 @@
 
 <style lang="postcss">
   main {
-    @apply flex flex-col gap-8 lg:justify-around lg:flex-row items-center justify-center min-h-screen py-2;
+    @apply flex flex-col gap-8 lg:justify-around lg:flex-row items-center justify-center min-h-[var(--body-height)] py-2;
   }
 
   .login {
