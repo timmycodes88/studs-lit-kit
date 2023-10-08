@@ -9,4 +9,4 @@
 
 ## Demo
 
-https://livekit.vercel.app
+https://litkit.vercel.app
