@@ -1,16 +1,22 @@
+<script>
+  import { fade, blur } from "svelte/transition"
+</script>
+
 <img
+  in:fade
   class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55rem] h-auto opacity-10"
   src="/assets/fire.png"
   alt="decoration"
 />
-
-<main>
-  <div class="flex flex-col gap-8 items-center justify-center">
-    <h1 class="text-4xl font-bold text-center">Supa Realtime</h1>
-    <img class="login" src="/icon-512x512.png" alt="logo" />
-  </div>
-  <slot />
-</main>
+<div in:blur={{ duration: 888 }} class="relative">
+  <main>
+    <div class="flex flex-col gap-8 items-center justify-center">
+      <h1 class="text-4xl font-bold text-center">Supa Realtime</h1>
+      <img class="login" src="/icon-512x512.png" alt="logo" />
+    </div>
+    <slot />
+  </main>
+</div>
 
 <style lang="postcss">
   main {

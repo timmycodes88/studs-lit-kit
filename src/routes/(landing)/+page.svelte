@@ -1,40 +1,25 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { fade, scale } from 'svelte/transition'
-  import Feature from './features-list.svelte'
-  import TypeWrite from './type-write.svelte'
-  import Glow from './Glow.svelte'
-  import Card from '$lib/components/ui/card.svelte'
-  import LoadPageParticals from './load-page-particals.svelte'
-  import { audioStore } from '$lib/stores/landing/audioStore'
-  import LandingPageParticals from './landing-page-particals.svelte'
-  import { quintInOut } from 'svelte/easing'
-  import { cn } from '$lib/utils'
+  import { onMount } from "svelte"
+  import { fade, scale } from "svelte/transition"
+  import Feature from "./features-list.svelte"
+  import TypeWrite from "./type-write.svelte"
+  import Glow from "./Glow.svelte"
+  import Card from "$lib/components/ui/card.svelte"
+  import LoadPageParticals from "./load-page-particals.svelte"
+  import { audioStore } from "$lib/stores/landing/audioStore"
+  import { quintInOut } from "svelte/easing"
+  import { cn } from "$lib/utils"
+  import { hasEnteredStore } from "$lib/stores/landing/hasEnteredStore"
 
-  let hasEntered = false
-  let audio: HTMLAudioElement
-
-  $: if ($audioStore) {
-    audio?.play()
-  } else {
-    audio?.pause()
-  }
-  let landingParticlesReady = false
   const start = () => {
-    audio = new Audio('/assets/her.mp3')
-    audio.loop = true
-    audio.play()
-    hasEntered = true
-    setTimeout(() => {
-      landingParticlesReady = true
-    }, 1300)
+    audioStore.update(c => ({ ...c, playing: true }))
+    hasEnteredStore.set(true)
   }
-  onMount(() => () => audio.pause())
 
   let showGlow = false
 </script>
 
-{#if !hasEntered}
+{#if !$hasEnteredStore}
   <div
     class="absolute inset-0 flex items-center justify-center bg-black z-10"
     out:fade={{ duration: 1250, easing: quintInOut }}
@@ -72,7 +57,7 @@
           Social Applications at Rapid Speeds.
         </C.Text>
         <C.Actions>
-          <button class="btn btn-primary"> Join Now! </button>
+          <a href="/register" class="btn btn-primary"> Join Now! </a>
         </C.Actions>
       </Card>
 
@@ -85,16 +70,6 @@
       </a>
     </div>
     <Feature mobile />
-  </div>
-  <div
-    class={cn(
-      'fixed inset-0 z-[-2] opacity-0 transition-opacity duration-700',
-      landingParticlesReady && 'opacity-100'
-    )}
-  >
-    {#if landingParticlesReady}
-      <LandingPageParticals />
-    {/if}
   </div>
 {/if}
 
