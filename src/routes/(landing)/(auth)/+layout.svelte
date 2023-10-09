@@ -1,7 +1,7 @@
 <script>
-  import { hasEnteredStore } from "$lib/stores/landing/hasEnteredStore"
-  import { onMount } from "svelte"
-  import { fade, blur } from "svelte/transition"
+  import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
+  import { onMount } from 'svelte'
+  import { fade, blur } from 'svelte/transition'
 
   onMount(() => {
     hasEnteredStore.set(true)

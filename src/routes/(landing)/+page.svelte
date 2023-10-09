@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { blur, fade, scale } from 'svelte/transition'
+  import { blur, fade, scale, slide } from 'svelte/transition'
   import Feature from './features-list.svelte'
   import TypeWrite from './type-write.svelte'
   import Glow from './Glow.svelte'
@@ -9,15 +9,22 @@
   import { audioStore } from '$lib/stores/landing/audioStore'
   import { quintInOut } from 'svelte/easing'
   import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
+  import { cn } from '$lib/utils'
 
-  let bounce = false
+  let scaleIn = false
   const start = () => {
-    bounce = true
     audioStore.update(c => ({ ...c, playing: true }))
     hasEnteredStore.set(true)
+  }
+
+  onMount(() => {
+    if ($hasEnteredStore) scaleIn = true
+  })
+
+  $: if ($hasEnteredStore) {
     setTimeout(() => {
-      bounce = false
-    }, 3500)
+      scaleIn = true
+    }, 1300)
   }
 
   let showGlow = false
@@ -48,12 +55,14 @@
   <div in:fade={{ duration: 4000, easing: quintInOut }} class="wrapper">
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    <div class="life">
-      <img
-        src="/assets/metame.png"
-        alt="Meta Me"
-        class={bounce ? 'bounce' : ''}
-      />
+    <div
+      class={cn(
+        'life',
+        $audioStore.playing && 'animate-life',
+        scaleIn && 'scale-in'
+      )}
+    >
+      <img src="/assets/metame.png" alt="Meta Me" class="bounce" />
     </div>
     <Glow />
     <div class="col">
@@ -94,22 +103,35 @@
 
 <style lang="postcss">
   .bounce {
-    animation: bounce 1s infinite;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
   }
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(-2%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  @keyframes floating {
+    0% {
+      transform: translate(0, 0px);
     }
     50% {
-      transform: none;
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      transform: translate(0, 15px);
+    }
+    100% {
+      transform: translate(0, -0px);
     }
   }
   .life {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1];
+    @apply scale-0 origin-center transition-transform duration-1000;
+  }
+
+  .animate-life {
     animation: life 5s cubic-bezier(0, 0, 0, 0.5) infinite;
+  }
+
+  .scale-in {
+    @apply scale-100;
   }
 
   @keyframes life {
