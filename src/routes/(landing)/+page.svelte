@@ -109,6 +109,7 @@
     animation-timing-function: ease-in-out;
     margin-left: 30px;
     margin-top: 5px;
+    @apply min-w-[472px];
   }
   @keyframes floating {
     0% {
@@ -122,7 +123,7 @@
     }
   }
   .life {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1];
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[72px] z-[-1];
     @apply scale-0 origin-center transition-transform duration-1000;
   }
 
