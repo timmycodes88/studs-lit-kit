@@ -11,7 +11,7 @@
     mobile ? 'flex lg:hidden text-center' : 'hidden lg:flex '
   )}
 >
-  <Card bg="bg-base-200/50">
+  <Card bg="bg-base-200/80">
     <ul>
       <li class="text-lg">
         Uses <span class="font-bold">SvelteKit</span> as app

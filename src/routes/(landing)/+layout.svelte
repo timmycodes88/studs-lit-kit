@@ -96,6 +96,6 @@
   }
 
   h1 {
-    @apply text-4xl font-bold uppercase;
+    @apply text-2xl lg:text-4xl font-bold uppercase;
   }
 </style>

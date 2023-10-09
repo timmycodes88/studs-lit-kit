@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { onMount } from "svelte"
-  import { fade, scale } from "svelte/transition"
-  import Feature from "./features-list.svelte"
-  import TypeWrite from "./type-write.svelte"
-  import Glow from "./Glow.svelte"
-  import Card from "$lib/components/ui/card.svelte"
-  import LoadPageParticals from "./load-page-particals.svelte"
-  import { audioStore } from "$lib/stores/landing/audioStore"
-  import { quintInOut } from "svelte/easing"
-  import { cn } from "$lib/utils"
-  import { hasEnteredStore } from "$lib/stores/landing/hasEnteredStore"
+  import { onMount } from 'svelte'
+  import { blur, fade, scale } from 'svelte/transition'
+  import Feature from './features-list.svelte'
+  import TypeWrite from './type-write.svelte'
+  import Glow from './Glow.svelte'
+  import Card from '$lib/components/ui/card.svelte'
+  import LoadPageParticals from './load-page-particals.svelte'
+  import { audioStore } from '$lib/stores/landing/audioStore'
+  import { quintInOut } from 'svelte/easing'
+  import { cn } from '$lib/utils'
+  import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
 
   const start = () => {
     audioStore.update(c => ({ ...c, playing: true }))
@@ -50,7 +50,7 @@
     </div>
 
     <div class="col">
-      <Card let:C bg="bg-base-200/50">
+      <Card let:C bg="bg-base-200/80">
         <C.Title>BrightSide Developer's Latest Creation!</C.Title>
         <C.Text>
           Stud's Lit Kit is the Ultimate Tech Stack to Develop High Quality
@@ -70,14 +70,30 @@
       </a>
     </div>
     <Feature mobile />
+    <a
+      href="https://github.com/timmycodes88/studs-lit-kit"
+      target="_blank"
+      class="lg:hidden btn btn-link"
+    >
+      Check out the Source Code
+    </a>
   </div>
 {/if}
 
 <style lang="postcss">
   img {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1];
+    animation: life 5s cubic-bezier(0, 0, 0, 0.5) infinite;
   }
 
+  @keyframes life {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
   .col {
     @apply mx-auto flex flex-col gap-10 lg:w-[32rem] lg:m-0;
   }
