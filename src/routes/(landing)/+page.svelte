@@ -8,23 +8,21 @@
   import LoadPageParticals from './load-page-particals.svelte'
   import { audioStore } from '$lib/stores/landing/audioStore'
   import { quintInOut } from 'svelte/easing'
-  import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
+  import {
+    hasEnteredStore,
+    scaledInStore,
+  } from '$lib/stores/landing/hasEnteredStore'
   import { cn } from '$lib/utils'
 
-  let scaleIn = false
   const start = () => {
     audioStore.update(c => ({ ...c, playing: true }))
     hasEnteredStore.set(true)
   }
 
-  onMount(() => {
-    if ($hasEnteredStore) scaleIn = true
-  })
-
   $: if ($hasEnteredStore) {
     setTimeout(() => {
-      scaleIn = true
-    }, 1300)
+      $scaledInStore = true
+    }, 700)
   }
 
   let showGlow = false
@@ -59,7 +57,7 @@
       class={cn(
         'life',
         $audioStore.playing && 'animate-life',
-        scaleIn && 'scale-in'
+        $scaledInStore && 'scale-in'
       )}
     >
       <img src="/assets/metame.png" alt="Meta Me" class="bounce" />
@@ -123,7 +121,7 @@
     }
   }
   .life {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[72px] z-[-1];
+    @apply absolute transition-all hue-rotate-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[72px] z-[-1];
     @apply scale-0 origin-center transition-transform duration-1000;
   }
 

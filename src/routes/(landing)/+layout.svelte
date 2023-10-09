@@ -2,7 +2,10 @@
   import Header from '$lib/components/shared/header.svelte'
   import ThemeToggle from '$lib/components/shared/theme-toggle.svelte'
   import { audioStore } from '$lib/stores/landing/audioStore'
-  import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
+  import {
+    hasEnteredStore,
+    scaledInStore,
+  } from '$lib/stores/landing/hasEnteredStore'
   import { Volume2, VolumeX } from 'lucide-svelte'
   import { onMount } from 'svelte'
   import { page } from '$app/stores'
@@ -14,6 +17,7 @@
     return () => {
       $audioStore.audio?.pause()
       audioStore.update(() => ({ playing: false, audio: null }))
+      scaledInStore.set(false)
     }
   })
 
