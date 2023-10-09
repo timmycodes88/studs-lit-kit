@@ -22,7 +22,7 @@
   $: if ($hasEnteredStore) {
     setTimeout(() => {
       $scaledInStore = true
-    }, 700)
+    }, 888)
   }
 
   let showGlow = false
@@ -50,7 +50,7 @@
     <Glow enter {showGlow} />
   </div>
 {:else}
-  <div in:fade={{ duration: 4000, easing: quintInOut }} class="wrapper">
+  <div in:fade={{ duration: 3000, easing: quintInOut }} class="wrapper">
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
     <div
@@ -69,7 +69,7 @@
     </div>
 
     <div class="col">
-      <Card let:C bg="bg-base-200/80">
+      <Card let:C bg="bg-base-200/80 mx-auto">
         <C.Title>BrightSide Developer's Latest Creation!</C.Title>
         <C.Text>
           Stud's Lit Kit is the Ultimate Tech Stack to Develop High Quality
@@ -121,7 +121,7 @@
     }
   }
   .life {
-    @apply absolute transition-all hue-rotate-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[72px] z-[-1];
+    @apply absolute transition-all hue-rotate-0 top-1/2 left-1/2 translate-x-[-55%] -translate-y-1/2 min-w-[72px] z-[-1];
     @apply scale-0 origin-center transition-transform duration-1000;
   }
 
