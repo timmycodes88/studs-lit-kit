@@ -8,12 +8,16 @@
   import LoadPageParticals from './load-page-particals.svelte'
   import { audioStore } from '$lib/stores/landing/audioStore'
   import { quintInOut } from 'svelte/easing'
-  import { cn } from '$lib/utils'
   import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
 
+  let bounce = false
   const start = () => {
+    bounce = true
     audioStore.update(c => ({ ...c, playing: true }))
     hasEnteredStore.set(true)
+    setTimeout(() => {
+      bounce = false
+    }, 3500)
   }
 
   let showGlow = false
@@ -42,7 +46,15 @@
   </div>
 {:else}
   <div in:fade={{ duration: 4000, easing: quintInOut }} class="wrapper">
-    <img src="/assets/metame.png" alt="Meta Me" />
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+    <div class="life">
+      <img
+        src="/assets/metame.png"
+        alt="Meta Me"
+        class={bounce ? 'bounce' : ''}
+      />
+    </div>
     <Glow />
     <div class="col">
       <TypeWrite />
@@ -81,7 +93,21 @@
 {/if}
 
 <style lang="postcss">
-  img {
+  .bounce {
+    animation: bounce 1s infinite;
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-2%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  .life {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[-1];
     animation: life 5s cubic-bezier(0, 0, 0, 0.5) infinite;
   }
