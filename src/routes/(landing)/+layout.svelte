@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Header from "$lib/components/shared/header.svelte"
-  import ThemeToggle from "$lib/components/shared/theme-toggle.svelte"
-  import { audioStore } from "$lib/stores/landing/audioStore"
-  import { hasEnteredStore } from "$lib/stores/landing/hasEnteredStore"
-  import { Volume2, VolumeX } from "lucide-svelte"
-  import { onMount } from "svelte"
-  import { page } from "$app/stores"
-  import LandingPageParticals from "./landing-page-particals.svelte"
-  import { cn } from "$lib/utils"
+  import Header from '$lib/components/shared/header.svelte'
+  import ThemeToggle from '$lib/components/shared/theme-toggle.svelte'
+  import { audioStore } from '$lib/stores/landing/audioStore'
+  import { hasEnteredStore } from '$lib/stores/landing/hasEnteredStore'
+  import { Volume2, VolumeX } from 'lucide-svelte'
+  import { onMount } from 'svelte'
+  import { page } from '$app/stores'
+  import LandingPageParticals from './landing-page-particals.svelte'
+  import { cn } from '$lib/utils'
 
   onMount(() => {
-    audioStore.update(c => ({ ...c, audio: new Audio("/assets/her.mp3") }))
+    audioStore.update(c => ({ ...c, audio: new Audio('/assets/her.mp3') }))
     return () => {
       $audioStore.audio?.pause()
       audioStore.update(() => ({ playing: false, audio: null }))
@@ -34,7 +34,9 @@
 </script>
 
 <Header landing>
-  <svelte:fragment slot="left">Stud's Lit Kit</svelte:fragment>
+  <svelte:fragment slot="left"
+    ><a href="/"><h1>Stud's Lit Kit</h1></a></svelte:fragment
+  >
 
   <svelte:fragment slot="right">
     <label class="swap">
@@ -52,12 +54,12 @@
       />
     </label>
     <ThemeToggle />
-    {#if $page.url.pathname === "/register"}
-      <a href="/login">
+    {#if $page.url.pathname === '/register'}
+      <a class="link" href="/login">
         <span>Login</span>
       </a>
     {:else}
-      <a href="/register">
+      <a class="link" href="/register">
         <span class="md:hidden">Join</span>
         <span class="hidden md:inline">Create an Account</span>
       </a>
@@ -68,8 +70,8 @@
 <slot />
 <div
   class={cn(
-    "fixed inset-0 z-[-2] opacity-0 transition-opacity duration-1000",
-    landingParticlesReady && "opacity-100"
+    'fixed inset-0 z-[-2] opacity-0 transition-opacity duration-1000',
+    landingParticlesReady && 'opacity-100'
   )}
 >
   {#if landingParticlesReady}
@@ -89,7 +91,11 @@
     @apply flex items-center gap-4;
   }
 
-  a {
+  .link {
     @apply btn rounded-full;
+  }
+
+  h1 {
+    @apply text-4xl font-bold uppercase;
   }
 </style>

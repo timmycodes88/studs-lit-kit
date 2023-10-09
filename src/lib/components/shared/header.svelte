@@ -3,7 +3,7 @@
 </script>
 
 <header>
-  <a href={landing ? "/" : "/home"}><h1><slot name="left" /></h1></a>
+  <slot name="left" />
 
   <div class="trail">
     <slot name="right" />
@@ -19,10 +19,6 @@
     @apply px-6;
     @apply w-full h-[var(--header-height)];
     @apply shadow-xl bg-base-200/50 backdrop-blur;
-  }
-
-  h1 {
-    @apply text-4xl font-bold uppercase;
   }
 
   .trail {
