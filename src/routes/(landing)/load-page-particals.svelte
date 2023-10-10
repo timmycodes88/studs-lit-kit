@@ -2,7 +2,6 @@
   // @ts-nocheck
 
   import { onMount } from 'svelte'
-  // import { loadSlim } from 'tsparticles-slim' // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
   import { loadFull } from 'tsparticles' // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
 
   let ParticlesComponent
@@ -94,9 +93,7 @@
     },
   }
 
-  let onParticlesLoaded = event => {
-    const particlesContainer = event.detail.particles
-  }
+  let onParticlesLoaded = event => {}
 
   let particlesInit = async engine => {
     await loadFull(engine)
